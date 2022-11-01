@@ -78,6 +78,11 @@ NOTE:
 - Dependencies of a prebuilt pod will be automatically treated as prebuilt pods.\
 For example, if `RxCocoa` is declared as a prebuilt pod using the `:binary => true` option, then `RxSwift`, one of its dependencies, is also treated as a prebuilt pod.
 
+If you don't want its dependent be treated as a prebuild pod, just do as follows:
+```rb
+pod "RxSwift"
+```
+This is an alternative replacement for adding `excluded_pods` option in `config_cocoapods_binary_cache` method explicitly.
 ### 3. CLI
 
 We provided some command line interfaces (CLI):

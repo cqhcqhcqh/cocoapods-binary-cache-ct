@@ -7,12 +7,17 @@ module PodPrebuild
 
   class Config # rubocop:disable Metrics/ClassLength
     attr_accessor :dsl_config, :cli_config
+    
+    def explict_exclude_prebuilt_pod_names
+      @explict_exclude_prebuilt_pod_names
+    end
 
     def initialize(path)
       @deprecated_config = File.exist?(path) ? PodPrebuild::JSONFile.new(path).data : {}
       @dsl_config = {}
       @cli_config = {}
       @detected_config = {}
+      @explict_exclude_prebuilt_pod_names = []
     end
 
     def self.instance
