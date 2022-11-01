@@ -1,4 +1,3 @@
-require "cocoapods-binary-cache/pod-binary/helper/detected_prebuilt_pods/target_definition.rb"
 
 module Pod
   class Installer
@@ -19,7 +18,7 @@ module Pod
         targets = pod_targets.select { |target| explicit_prebuilt_pod_names.include?(target.pod_name) }
         dependencies = targets.flat_map(&:recursive_dependent_targets) # Treat dependencies as prebuilt pods
         dependencies = dependencies.select { |target|
-          !$explict_none_prebuilt_pod_names.include?(target.pod_name)
+          !PodPrebuild.config.explict_exclude_prebuilt_pod_names.include?(target.pod_name)
         }
         all = (targets + dependencies).uniq
         all = all.reject { |target| sandbox.local?(target.pod_name) } unless PodPrebuild.config.dev_pods_enabled?
